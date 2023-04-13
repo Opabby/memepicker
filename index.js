@@ -4,6 +4,10 @@ const emotionRadios = document.querySelector('#emotion-radios');
 emotionRadios.addEventListener('change', highlightCheckedOption)
 
 function highlightCheckedOption(e){
+    const radios = document.getElementsByClassName('radio');
+    for (let radio of radios){
+        radio.classList.remove('highlight');
+    }
     e.target.parentElement.classList.add('highlight');
 }
 
@@ -25,7 +29,7 @@ function renderEmotionsRadios(cats){
     for (let emotion of emotions){
         radioItems += `<div class="radio">
                             <label for=${emotion}>${emotion}</label>
-                            <input 
+                            <input class="radio"
                                 type="radio" 
                                 id="${emotion}" 
                                 value="${emotion}" 
