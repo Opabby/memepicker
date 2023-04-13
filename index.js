@@ -6,7 +6,9 @@ emotionRadios.addEventListener('change', highlightCheckedOption)
 getImageBtn.addEventListener('click', getMatchingCatsArray);
 
 function getMatchingCatsArray() {
-    const checkedRadio = document.querySelector('input[type="radio"]:checked').value;
+    if (document.querySelector('input[type="radio"]:checked')){
+        const checkedRadio = document.querySelector('input[type="radio"]:checked').value;
+    }
 }
 
 function highlightCheckedOption(e){
