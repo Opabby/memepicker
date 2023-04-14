@@ -9,8 +9,10 @@ getImageBtn.addEventListener('click', getMatchingCatsArray);
 function getMatchingCatsArray() {
     if (document.querySelector('input[type="radio"]:checked')){
         const isGif = gifsOnlyOption.checked;
-        const checkedRadio = document.querySelector('input[type="radio"]:checked').value;
-        
+        const selectedEmotion = document.querySelector('input[type="radio"]:checked').value;
+        const matchingCatsArray = catsData.filter(function(cat){
+            return cat.emotionTags.includes(selectedEmotion);
+        })
     }
 }
 
