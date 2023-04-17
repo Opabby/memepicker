@@ -2,6 +2,8 @@ import { catsData } from '/data.js';
 const emotionRadios = document.querySelector('#emotion-radios');
 const getImageBtn = document.querySelector('#get-image-btn'); 
 const gifsOnlyOption = document.querySelector('#gifs-only-option');
+const memeModalInner = document.querySelector('#meme-modal-inner');
+const memeModal = document.querySelector('#meme-modal');
 
 emotionRadios.addEventListener('change', highlightCheckedOption)
 getImageBtn.addEventListener('click', renderCat);
@@ -24,10 +26,10 @@ function getMatchingCatsArray() {
 function getSingleCatObject() {
     const catsArray = getMatchingCatsArray();
     if(catsArray.length === 1){
-        console.log(catsArray[0]);
+        return catsArray[0];
     } else {
         const randomNumber = Math.floor(Math.random() * catsArray.length);
-        console.log(catsArray[randomNumber]);
+        return catsArray[randomNumber];
     }
 }
 
