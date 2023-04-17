@@ -1,4 +1,5 @@
 import { catsData } from '/data.js';
+
 const emotionRadios = document.querySelector('#emotion-radios');
 const getImageBtn = document.querySelector('#get-image-btn'); 
 const gifsOnlyOption = document.querySelector('#gifs-only-option');
@@ -7,10 +8,43 @@ const memeModal = document.querySelector('#meme-modal');
 const closeBtn = document.querySelector('#meme-modal-close-btn');
 
 emotionRadios.addEventListener('change', highlightCheckedOption)
+
+closeBtn.addEventListener('click', closeModal)
+
 getImageBtn.addEventListener('click', renderCat);
-closeBtn.addEventListener('click', function(){
+
+function highlightCheckedOption(e){
+    const radios = document.getElementsByClassName('radio');
+    for (let radio of radios){
+        radio.classList.remove('highlight');
+    }
+    e.target.parentElement.classList.add('highlight');
+}
+
+function closeModal() {
     memeModal.style.display = 'none';
-})
+}
+
+function renderCat() {
+    const catObject = getSingleCatObject();
+    memeModalInner.innerHTML = `<img
+                                class="cat-img"
+                                src="./images/${catObject.image}"
+                                alt="${catObject.alt}"
+                                >`;
+    memeModal.style.display = 'flex';
+
+}
+
+function getSingleCatObject() {
+    const catsArray = getMatchingCatsArray();
+    if(catsArray.length === 1){
+        return catsArray[0];
+    } else {
+        const randomNumber = Math.floor(Math.random() * catsArray.length);
+        return catsArray[randomNumber];
+    }
+}
 
 function getMatchingCatsArray() {
     if (document.querySelector('input[type="radio"]:checked')){
@@ -25,35 +59,6 @@ function getMatchingCatsArray() {
         })
         return matchingCatsArray;
     }
-}
-
-function getSingleCatObject() {
-    const catsArray = getMatchingCatsArray();
-    if(catsArray.length === 1){
-        return catsArray[0];
-    } else {
-        const randomNumber = Math.floor(Math.random() * catsArray.length);
-        return catsArray[randomNumber];
-    }
-}
-
-function renderCat() {
-    const catObject = getSingleCatObject();
-    memeModalInner.innerHTML = `<img
-                                class="cat-img"
-                                src="./images/${catObject.image}"
-                                alt="${catObject.alt}"
-                                >`;
-    memeModal.style.display = 'flex';
-
-}
-
-function highlightCheckedOption(e){
-    const radios = document.getElementsByClassName('radio');
-    for (let radio of radios){
-        radio.classList.remove('highlight');
-    }
-    e.target.parentElement.classList.add('highlight');
 }
 
 function getEmotionsArray(cats){
@@ -85,4 +90,3 @@ function renderEmotionsRadios(cats){
 }
 
 renderEmotionsRadios(catsData);
-
